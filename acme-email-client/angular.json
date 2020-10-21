@@ -81,7 +81,7 @@
             "production": {
               "browserTarget": "acme-email-client:build:production",
               "customWebpackConfig": {
-                "path": "./webpack.config.js"
+                "path": "./webpack.prod.config.js"
               }
             }
           }
