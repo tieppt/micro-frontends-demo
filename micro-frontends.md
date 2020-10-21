@@ -137,7 +137,6 @@ Dưới đây là một phần của file `angular.json`.
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "acme-email-client:build",
-            "port": 5200,
             "customWebpackConfig": {
               "path": "./webpack.config.js"
             }
