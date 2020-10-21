@@ -72,7 +72,6 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "acme-email-client:build",
-            "port": 5200,
             "customWebpackConfig": {
               "path": "./webpack.config.js"
             }
@@ -208,7 +207,6 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "mailbox:build",
-            "port": 5300,
             "customWebpackConfig": {
               "path": "projects/mailbox/webpack.config.js"
             }
@@ -344,7 +342,6 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "calendar:build",
-            "port": 5400,
             "customWebpackConfig": {
               "path": "projects/calendar/webpack.config.js"
             }

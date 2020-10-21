@@ -8,9 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:shell": "ng serve --project=acme-email-client",
-    "start:mailbox": "ng serve --project=mailbox",
-    "start:calendar": "ng serve --project=calendar"
+    "start:shell": "ng serve --project=acme-email-client --port 5200",
+    "start:mailbox": "ng serve --project=mailbox --port 5300",
+    "start:calendar": "ng serve --project=calendar --port 5400"
   },
   "private": true,
   "dependencies": {
