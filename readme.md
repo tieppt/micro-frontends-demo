@@ -7,7 +7,7 @@ Code demo: [acme-email-client](./acme-email-client)
 Scripts:
 
 ```sh
-yarn start:shell
-yarn start:mailbox
-yarn start:calendar
+npm run start:shell
+npm run start:mailbox
+npm run start:calendar
 ```
