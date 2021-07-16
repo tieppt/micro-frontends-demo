@@ -8,6 +8,9 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
       },
       "root": "",
@@ -22,7 +25,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -37,53 +40,51 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
               "customWebpackConfig": {
                 "path": "./webpack.prod.config.js"
               }
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
-          "options": {
-            "browserTarget": "acme-email-client:build",
-            "customWebpackConfig": {
-              "path": "./webpack.config.js"
-            }
-          },
           "configurations": {
             "production": {
-              "browserTarget": "acme-email-client:build:production",
-              "customWebpackConfig": {
-                "path": "./webpack.prod.config.js"
-              }
+              "browserTarget": "acme-email-client:build:production"
+            },
+            "development": {
+              "browserTarget": "acme-email-client:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -92,12 +93,13 @@
           }
         },
         "test": {
-          "builder": "@angular-builders/custom-webpack:karma",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -105,35 +107,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "customWebpackConfig": {
-              "path": "webpack.config.js"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "acme-email-client:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "acme-email-client:serve:production"
-            }
+            "scripts": []
           }
         }
       }
@@ -143,11 +117,14 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
       },
       "root": "projects/mailbox",
       "sourceRoot": "projects/mailbox/src",
-      "prefix": "mb",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
@@ -157,7 +134,7 @@
             "main": "projects/mailbox/src/main.ts",
             "polyfills": "projects/mailbox/src/polyfills.ts",
             "tsConfig": "projects/mailbox/tsconfig.app.json",
-            "aot": true,
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/mailbox/src/favicon.ico",
               "projects/mailbox/src/assets"
@@ -172,56 +149,54 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "projects/mailbox/src/environments/environment.ts",
                   "with": "projects/mailbox/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
               "customWebpackConfig": {
                 "path": "projects/mailbox/webpack.prod.config.js"
               }
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
-          "options": {
-            "browserTarget": "mailbox:build",
-            "customWebpackConfig": {
-              "path": "projects/mailbox/webpack.config.js"
-            }
-          },
           "configurations": {
             "production": {
-              "browserTarget": "mailbox:build:production",
-              "customWebpackConfig": {
-                "path": "projects/mailbox/webpack.prod.config.js"
-              }
+              "browserTarget": "mailbox:build:production"
+            },
+            "development": {
+              "browserTarget": "mailbox:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular-builders/custom-webpack:extract-i18n",
           "options": {
             "browserTarget": "mailbox:build"
           }
@@ -233,6 +208,7 @@
             "polyfills": "projects/mailbox/src/polyfills.ts",
             "tsConfig": "projects/mailbox/tsconfig.spec.json",
             "karmaConfig": "projects/mailbox/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/mailbox/src/favicon.ico",
               "projects/mailbox/src/assets"
@@ -240,35 +216,7 @@
             "styles": [
               "projects/mailbox/src/styles.scss"
             ],
-            "scripts": [],
-            "customWebpackConfig": {
-              "path": "projects/mailbox/webpack.config.js"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/mailbox/tsconfig.app.json",
-              "projects/mailbox/tsconfig.spec.json",
-              "projects/mailbox/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/mailbox/e2e/protractor.conf.js",
-            "devServerTarget": "mailbox:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "mailbox:serve:production"
-            }
+            "scripts": []
           }
         }
       }
@@ -278,11 +226,14 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
       },
       "root": "projects/calendar",
       "sourceRoot": "projects/calendar/src",
-      "prefix": "cld",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
@@ -292,7 +243,7 @@
             "main": "projects/calendar/src/main.ts",
             "polyfills": "projects/calendar/src/polyfills.ts",
             "tsConfig": "projects/calendar/tsconfig.app.json",
-            "aot": true,
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/calendar/src/favicon.ico",
               "projects/calendar/src/assets"
@@ -307,56 +258,54 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "projects/calendar/src/environments/environment.ts",
                   "with": "projects/calendar/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
               "customWebpackConfig": {
                 "path": "projects/calendar/webpack.prod.config.js"
               }
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
-          "options": {
-            "browserTarget": "calendar:build",
-            "customWebpackConfig": {
-              "path": "projects/calendar/webpack.config.js"
-            }
-          },
           "configurations": {
             "production": {
-              "browserTarget": "calendar:build:production",
-              "customWebpackConfig": {
-                "path": "projects/calendar/webpack.prod.config.js"
-              }
+              "browserTarget": "calendar:build:production"
+            },
+            "development": {
+              "browserTarget": "calendar:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular-builders/custom-webpack:extract-i18n",
           "options": {
             "browserTarget": "calendar:build"
           }
@@ -368,6 +317,7 @@
             "polyfills": "projects/calendar/src/polyfills.ts",
             "tsConfig": "projects/calendar/tsconfig.spec.json",
             "karmaConfig": "projects/calendar/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/calendar/src/favicon.ico",
               "projects/calendar/src/assets"
@@ -375,42 +325,11 @@
             "styles": [
               "projects/calendar/src/styles.scss"
             ],
-            "scripts": [],
-            "customWebpackConfig": {
-              "path": "projects/calendar/webpack.config.js"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/calendar/tsconfig.app.json",
-              "projects/calendar/tsconfig.spec.json",
-              "projects/calendar/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/calendar/e2e/protractor.conf.js",
-            "devServerTarget": "calendar:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "calendar:serve:production"
-            }
+            "scripts": []
           }
         }
       }
     }
   },
-  "defaultProject": "acme-email-client",
-  "cli": {
-    "packageManager": "yarn"
-  }
+  "defaultProject": "acme-email-client"
 }
