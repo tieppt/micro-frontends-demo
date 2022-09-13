@@ -6,6 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mailbox-home.component.scss']
 })
 export class MailboxHomeComponent implements OnInit {
+  emitEvent() {
+    const evt = new CustomEvent('customEvent', {
+      detail: {
+        data: new Date()
+      }
+    });
+    window.dispatchEvent(evt);
+    (window as any).eventBus.next({state: new Date()})
+  }
 
   constructor() { }
 

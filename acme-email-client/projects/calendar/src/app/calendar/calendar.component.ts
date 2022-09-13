@@ -10,6 +10,7 @@ export class CalendarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    (window as any).eventBus.subscribe((e: any) => console.log('subject', e));
   }
 
 }
