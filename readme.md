@@ -2,7 +2,7 @@
 
 Bài viết: [micro-frontends.md](./micro-frontends.md)
 
-Code demo: [acme-email-client](./acme-email-client)
+Code demo: [ngft-email-client](./ngft-email-client)
 
 Scripts:
 
